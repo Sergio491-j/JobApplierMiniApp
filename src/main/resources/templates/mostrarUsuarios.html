@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios ChinoSlots</title>
+    <link rel="shortcut icon" href="../static/Imagenes/ImagenesFormulario/chino_sin_fondo.png" type="image.png">
+
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle at top, #1b1b1b, #0d0d0d);
+            color: white;
+        }
+
+        #contenedor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 40px;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 60%;
+            background-color: #111;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        caption {
+            font-size: 32px;
+            font-weight: bold;
+            padding: 20px;
+            background: linear-gradient(90deg, gold, #ffcc00);
+            color: black;
+            border-radius: 15px 15px 0 0;
+        }
+
+        th {
+            background: #222;
+            color: gold;
+            padding: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid gold;
+        }
+
+        td {
+            padding: 16px;
+            background-color: #1a1a1a;
+            color: white;
+            border-bottom: 1px solid #333;
+        }
+
+        tr:hover td {
+            background-color: #2a2a2a;
+            transition: 0.2s;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="contenedor"></div>
+
+<script>
+    async function mostrarUsuarios() {
+
+        const respuesta = await fetch("http://localhost:8080/ChinoSlots/showUsers");
+        const datos = await respuesta.json();
+
+        const contenedor = document.getElementById("contenedor");
+        contenedor.innerHTML = "";
+
+        const tabla = document.createElement("table");
+
+        tabla.innerHTML = `
+        <caption>DATOS DE LOS USUARIOS</caption>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>CONTRASEÑA</th>
+            <th>EMAIL</th>
+            <th>DNI</th>
+            <th>ROL</th>
+        </tr>
+    `;
+
+        const tbody = document.createElement("tbody");
+
+        datos.forEach(user => {
+
+            const tr = document.createElement("tr");
+
+            const rol = user.nombre.includes("qwerty--ChinoSlots")
+                ? "ADMIN"
+                : "USUARIO";
+
+            tr.innerHTML = `
+            <td>${user.id_usuario}</td>
+            <td>${user.nombre}</td>
+            <td>${user.password}</td>
+            <td>${user.email}</td>
+            <td>${user.dni}</td>
+            <td>${rol}</td>
+        `;
+
+            tbody.appendChild(tr);
+        });
+
+
+        tabla.appendChild(tbody);
+        contenedor.appendChild(tabla);
+    }
+
+    mostrarUsuarios();
+</script>
+
+</body>
+</html>
