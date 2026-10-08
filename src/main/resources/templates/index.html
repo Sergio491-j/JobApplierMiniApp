@@ -1,60 +1,31 @@
 <!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>URLs del BOT de RANDSTAND</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>TRABAJO</th>
+          <th>LOCALIDAD</th>
+          <th>FECHA DE LA LECTURA</th>
+          <th>HORA DE LA LECTURA</th>
+          <th>ESTADO</th>
+          <th>FECHA DE PUBLICACIÓN DE LA VACANTE</th>
+          <th>POSIBLE SALARIO</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
-  <script>
-      async function mostrarUsuarios() {
-          const respuesta = await fetch("http://localhost:8080/api/listaURLs");
-          const datos = await respuesta.json();
-
-
-          const tabla = document.createElement("table");
-
-          tabla.innerHTML = `
-        <caption>DATOS DE LAS VACANTES</caption>
-        <thead>
-            <tr>
-                <th>URL</th>
-                <th>TRABAJO</th>
-                <th>LOCALIDAD</th>
-                <th>FECHA DE LA LECTURA</th>
-                <th>HORA DE LA LECTURA</th>
-                <th>ESTADO</th>
-                <th>FECHA DE PUBLICACIÓN DE LA VACANTE</th>
-                <th>POSIBLE SALARIO</th>
-            </tr>
-        </thead>
-    `;
-
-          const tbody = document.createElement("tbody");
-
-          datos.forEach(vacante => {
-              const tr = document.createElement("tr");
-
-              tr.innerHTML = `
-            <td><a href="${vacante.urlVacante}" target="_blank">Ver enlace</a></td>
-            <td>${vacante.trabajo || 'No especificado'}</td>
-            <td>${vacante.localidad}</td>
-            <td>${vacante.fechaAplicacion}</td>
-            <td>${vacante.horaAplicacion}</td>
-            <td>${vacante.estado}</td>
-            <td>${vacante.fechaPublicacion}</td>
-            <td>${vacante.salario}</td>
-        `;
-              tbody.appendChild(tr);
-          });
-
-          tabla.appendChild(tbody);
-          document.body.appendChild(tabla);
-      }
-
-      mostrarUsuarios();
-  </script>
-</body>
+    <script src="../static/script.js"></script>
+  </body>
 </html>
