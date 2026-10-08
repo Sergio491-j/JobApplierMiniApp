@@ -5,6 +5,7 @@ import ejemplo.com.jobapplicationapp.service.JobApplicationService;
 import lombok.AllArgsConstructor;
 import java.util.List;
 
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +22,14 @@ public class JobApplicationController {
 
     @GetMapping("/listaURLs")
     public ResponseEntity<List<JobApplication>> getURL() {
-        if (service.getList() != null) return ResponseEntity.ok(service.getList());
-        else return ResponseEntity
+
+        var list = service.getList();
+
+        if (list.isEmpty()) return ResponseEntity
                 .noContent()
                 .build();
+
+
+        return ResponseEntity.ok(list);
     }
 }
