@@ -20,7 +20,7 @@ public class JobApplicationController {
 
     private JobApplicationService service;
 
-    @GetMapping("/listaURLs")
+    @GetMapping()
     public ResponseEntity<List<JobApplication>> getURL() {
 
         var list = service.getList();

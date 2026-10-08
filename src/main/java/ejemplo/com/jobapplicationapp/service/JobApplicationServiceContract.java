@@ -1,8 +1,8 @@
-package ejemplo.com.jobapplicationapp.contract;
+package ejemplo.com.jobapplicationapp.service;
 
 import org.openqa.selenium.WebDriver;
 
-public interface JobApplicationServiceITF {
+public interface JobApplicationServiceContract {
 
     default void waitTime(String textInConsole, int seconds) {
             for(int i = 0; i <= seconds; i++) {

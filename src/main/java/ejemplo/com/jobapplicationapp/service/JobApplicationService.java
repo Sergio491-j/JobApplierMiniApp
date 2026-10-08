@@ -1,7 +1,6 @@
 package ejemplo.com.jobapplicationapp.service;
 
-import ejemplo.com.jobapplicationapp.contract.JobApplicationRepository;
-import ejemplo.com.jobapplicationapp.contract.JobApplicationServiceITF;
+import ejemplo.com.jobapplicationapp.repository.JobApplicationRepository;
 import ejemplo.com.jobapplicationapp.model.JobApplication;
 import ejemplo.com.jobapplicationapp.exceptions.NullListJobException;
 import lombok.AllArgsConstructor;
@@ -18,7 +17,7 @@ import java.util.Scanner;
 
 @Service
 @AllArgsConstructor
-public class JobApplicationService implements JobApplicationServiceITF {
+public class JobApplicationService implements JobApplicationServiceContract {
 
     private JobApplicationRepository repository;
 
@@ -36,7 +35,8 @@ public class JobApplicationService implements JobApplicationServiceITF {
             System.out.println("MENU");
             System.out.println("======");
             System.out.println("Opción 1: extraer vacantes de empleo.");
-            System.out.println("Opción 2: salir del programa.");
+            System.out.println("Opción 2: abrir el navegador y ver las vacantes registradas");
+            System.out.println("Opción 3: salir del programa.");
             int option = sc.nextInt();
 
             switch (option) {
@@ -68,7 +68,9 @@ public class JobApplicationService implements JobApplicationServiceITF {
                     // TODO : Arrancamos el navegador
                     WebDriver web1 = new ChromeDriver(options1);
 
-                    web1.get("http://localhost:63342/AplicarEmpleoApp/InfoJobsApp/templates/index.html?_ijt=oq61q5rpf0k5ucumgm42obbnuq&_ij_reload=RELOAD_ON_SAVE");
+                    web1.get("http://localhost:8080/api"); // Cambio de la url a la que te manda el servidor
+                                                            // una vez se quiera consultar
+                                                            // las vacantes de trabajo.
                     break;
                 case 3:
                     waitTime("Cerrando el programa", 2);

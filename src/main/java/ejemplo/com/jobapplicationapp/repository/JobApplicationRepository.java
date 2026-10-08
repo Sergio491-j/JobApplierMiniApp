@@ -1,4 +1,4 @@
-package ejemplo.com.jobapplicationapp.contract;
+package ejemplo.com.jobapplicationapp.repository;
 
 import ejemplo.com.jobapplicationapp.model.JobApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
