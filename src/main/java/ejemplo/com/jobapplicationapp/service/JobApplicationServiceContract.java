@@ -1,6 +1,13 @@
 package ejemplo.com.jobapplicationapp.service;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public interface JobApplicationServiceContract {
 
@@ -27,16 +34,21 @@ public interface JobApplicationServiceContract {
 
     default void findCookies(WebDriver web) {
         try {
+            // Espera explícita de hasta 5 segundos a que el botón sea interaccionable
+            WebDriverWait wait = new WebDriverWait(web, Duration.ofSeconds(5));
 
-            waitTime("Encontrando las cookies", 2);
+            WebElement acceptCookiesBtn = wait.until(
+                    ExpectedConditions.elementToBeClickable(By.id("onetrust-accept-btn-handler"))
+            );
 
-            org.openqa.selenium.WebElement acceptCookiesBtn = web.findElement(org.openqa.selenium.By.id("onetrust-accept-btn-handler"));
             acceptCookiesBtn.click();
+            System.out.println("Cookies aceptadas correctamente.");
 
-            System.out.println("Botón encontrado.");
-
+        } catch (TimeoutException e) {
+            // Ocurre si el banner no apareció (por ejemplo, si las cookies ya se aceptaron)
+            System.out.println("El banner de cookies no apareció a tiempo.");
         } catch (Exception e) {
-            System.out.println("A ocurrido un error con el gestor de las cookies " + e.getMessage());
+            System.err.println("Error al gestionar las cookies: " + e.getMessage());
         }
     }
 
@@ -54,8 +66,5 @@ public interface JobApplicationServiceContract {
 
     }
 
-    void findFirstURL(WebDriver web,String province, String job);
-
-    void botMenu();
-
+    void rmSpamWindows(WebDriver web);
 }

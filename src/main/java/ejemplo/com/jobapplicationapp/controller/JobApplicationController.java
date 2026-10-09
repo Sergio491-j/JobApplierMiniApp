@@ -3,6 +3,8 @@ package ejemplo.com.jobapplicationapp.controller;
 import ejemplo.com.jobapplicationapp.model.JobApplication;
 import ejemplo.com.jobapplicationapp.service.JobApplicationService;
 import lombok.AllArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.coyote.Response;
@@ -21,9 +23,9 @@ public class JobApplicationController {
     private JobApplicationService service;
 
     @GetMapping()
-    public ResponseEntity<List<JobApplication>> getURL() {
+    public ResponseEntity<ArrayList<JobApplication>> getURL() {
 
-        var list = service.getList();
+        var list = service.getHola();
 
         if (list.isEmpty()) return ResponseEntity
                 .noContent()

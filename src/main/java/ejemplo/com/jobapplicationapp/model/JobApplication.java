@@ -18,20 +18,23 @@ public class JobApplication {
     private String urlVacante;
 
     private String localidad;
+    private String modalidad;
     private String salario;
+    private String tipo_contrato;
+    private String tipo_jornada;
     private String fechaPublicacion;
     private String estado = "SIN ENTREGAR";
-    private String trabajo;
 
-    private LocalDate fechaAplicacion;
-    private LocalTime horaAplicacion;
+    private LocalDate fechaAplicacion = LocalDate.now();
+    private LocalTime horaAplicacion = LocalTime.now();
 
-    public JobApplication(String urlVacante, String localidad, String salario, String fechaPublicacion, String trabajo) {
-        this.urlVacante = urlVacante;
+    public JobApplication(String localidad, String modalidad, String salario,
+                          String tipo_contrato, String tipo_jornada) {
         this.localidad = localidad;
+        this.modalidad = modalidad;
         this.salario = salario;
-        this.fechaPublicacion = fechaPublicacion;
-        this.trabajo = trabajo;
+        this.tipo_contrato = tipo_contrato;
+        this.tipo_jornada = tipo_jornada;
     }
 
     @PrePersist
